@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <form method="POST" action="">
+      {% csrf_token %}
+      {% if form.errors %}
+			<div class="alert">
+                Your Form Has Errors
+			  {% for field in form %}
+			  	{% if field.errors %}
+			  		{{ field.errors }}
+			  	{% endif %}
+			  {% endfor %}
+			  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Ok</button>
+            </div>
+			  
+			
+		{% endif %}
+    <div class="login">
+        <h1>Register</h1>
+        {{ form.as_p }}
+    <button type="submit" class="btn-login">Register</button>
+    <a href="{% url 'BlogApp:home' %}">Login</a>
+    </form>
+    </div>
+    
+  </section>
+  <style>
+        * {
+          font-family: sans-serif;
+          box-sizing: border-box;
+        }
+        body {
+          background: #e3f2fd;
+        }
+        
+        .password1 {
+            list-style: none;
+        }
+
+        .alert {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 8;
+            padding: 50px;
+            background: #fff;
+            transform: translate(-50%, -50%) scale(1);
+            border: 1px solid #000;
+            border-top: 20px solid #4070f4;
+            display: none;
+        }
+        .alert .btn-close {
+          padding: 10px;
+          background: #4070f4;
+          color: #000;
+          border: 1px solid #000;
+        }
+        .active {
+            display: block;
+        }
+        .login {
+          background: #fff;
+          position: absolute;
+          padding: 50px;
+          text-align: center;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%) scale(1);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .login h1 {
+          text-align: center;
+          padding: 10px;
+        }
+        .username, .email, .last_name, .first_name, .password1, .password2 {
+            padding: 10px 20px;
+            border-bottom: 1px solid #4070f4;
+            border-top: none;
+            border-left: 1px solid #4070f4;
+            border-right: none;
+            background-color: #e3f2fd;
+        }
+        
+       
+        .login .btn-login {
+          height: auto;
+          width: 81%;
+          border: none;
+          font-size: 18px;
+          font-weight: 400;
+          color: #fff;
+          background: #4070f4;
+          cursor: default;
+          margin: 10px 22px;
+          padding: 10px;
+        }
+        .login a {
+          padding: 20px;
+          text-decoration: none;
+        }
+        .login a:hover {
+          text-decoration: underline;
+        }
+        .message {
+          text-align: center;
+          background: #fff;
+          position: absolute;
+          transform: translate(-50% , -50%) scale(1.1);
+          z-index: 8;
+          top: 15%;
+          left: 50%;
+          height: 10%;
+          width: 22%;
+          border-radius: 6px;
+          padding: 10px;
+          transition: all 0.3s ease;
+          display: none;
+        }
+        .active {
+          display: block;
+          transition: all 0.3s ease;
+        }
+    </style>
+    <script>
+        const message = document.querySelector('.alert')
+        const btn_close = document.querySelector('.btn-close')
+      
+        message.classList.add('active');
+        btn_close.classList.remove('active')
+        setTimeout(() =>{
+            message.classList.remove('active');
+        }, 3000);
+    </script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="update">
+<h1>Update Record</h1>
+<br/>
+
+<form method="POST">
+	{% csrf_token %}
+
+	{{ form.as_p }}
+
+<br/>
+  <button type="submit" class="btn-update">Update Record</button>
+  <a href="{% url 'BlogApp:home' %}" class="btn-back">Back</a>
+
+</form>
+
+
+</div>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background: #e3f2fd;
+    }
+    
+    .update {
+        background: #fff;
+        padding: 50px;
+        position: absolute;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .update h1 {
+        color: #4070f4;
+    }
+
+    .btn-update, .btn-back {
+        border: none;
+        padding: 10px;
+        text-decoration: none;
+        color: white;
+        opacity: 1;
+    }
+
+    .btn-update {
+        background: #4070f4;
+    }
+    .btn-update:hover {
+        cursor: default;
+    }
+
+    .btn-back {
+        background: #4070f4;
+    }
+    .btn-back:hover {
+        cursor: default;
+    }
+
+    .city, .email, .last_name, .first_name, .phone, .address, .state, .zipcode {
+        margin: 10px;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        border-top: none;
+        border-bottom: 1px solid #4070f4;
+        border-right: none;
+        border-left: 1px solid #4070f4;
+        background-color: #e3f2fd;
+    }
+</style>
+{% endblock %}

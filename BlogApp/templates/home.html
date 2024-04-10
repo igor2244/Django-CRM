@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+
+{% if user.is_authenticated %}
+{% include 'navbar.html' %}
+
+<table>
+  
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Zipcode</th>
+      <th scope="col">Created_at</th>
+      <th scope="col">ID</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {% if records %}
+      {% for record in records %}
+        <tr>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.first_name }} {{ record.last_name }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.email }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.phone }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.address }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.city }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.state }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.zipcode }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.created_at }}</a></td>
+          <td><a href="{% url 'BlogApp:record' record.id %}">{{ record.id }}</a></td>  
+        </tr>
+          
+      {% endfor %}
+
+{% endif %}
+</table>
+{% else %}
+<section>
+  <form method="POST" action="{% url 'BlogApp:home' %}">
+    {% csrf_token %}
+    <div class="login">
+      <h1>login</h1>
+      <div class="username">
+        <input type="text", name="username", placeholder="Username" required">
+      </div>
+      <div class="password">
+        <input
+          type="password"
+          ,
+          name="password"
+          ,
+          placeholder="Password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn-login">Login</button>
+      <a href="{% url 'BlogApp:register' %}">Signup</a>
+    </div>
+  </form>
+</section>
+{% endif %}
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+  }
+  body {
+    background: #e3f2fd;
+  }
+  section {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #e3f2fd;
+  }
+  .login {
+    background: #fff;
+    padding: 50px;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  .position {
+    display: flex;
+    flex-direction: column;
+  }
+  .login h1 {
+    text-align: center;
+    padding: 10px;
+  }
+  .login .username {
+    padding: 10px 20px;
+  }
+  .login .username input,
+  .password input{
+    padding: 10px;
+    border-top: none;
+    border-left: 1px solid #4070f4;
+    border-right: none;
+    border-bottom: 1px solid #4070f4;
+    background-color: #e3f2fd;
+  }
+  
+  .login .password {
+    padding: 10px 20px;
+  }
+  .login .btn-login {
+    height: auto;
+    width: 81%;
+    border: 1px solid #000;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+    background: #4070f4;
+    cursor: default;
+    margin: 10px 22px;
+    padding: 10px;
+  }
+  .login a {
+    padding: 20px;
+    text-decoration: none;
+  }
+  .login a:hover {
+    text-decoration: underline;
+    cursor: default;
+  }
+  /*----------------table---------------------------*/
+  table {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+  }
+  table, td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  td {
+    cursor: pointer;
+  }
+  table tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  table tr:hover {
+    background-color: #4070f4;
+  }
+
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4070f4;
+    color: white;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+ 
+
+  /*----------------fin table----------------------*/
+  .message {
+    text-align: center;
+    background: #fff;
+    position: absolute;
+    transform: translate(-50% , -50%) scale(1.2);
+    z-index: 8;
+    top: 50%;
+    left: 50%;
+    height: 15%;
+    width: 30%;
+    padding: 25px;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+    border-top: 20px solid #4070f4;
+    display: none;
+  }
+  .active {
+    display: block;
+    transition: all 0.3s ease;
+  }
+  
+  
+</style>
+<script>
+  const message = document.querySelector('.message')
+      
+    message.classList.add('active');
+    setTimeout(() =>{
+      message.classList.remove('active');
+    }, 3000);
+</script>
+{% endblock %}

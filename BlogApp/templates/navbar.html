@@ -1,0 +1,72 @@
+<header class="topbar">
+    {% if user.is_authenticated %}
+    <div class="logo">Welcome
+        {{ user }} !
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'BlogApp:add_record' %}">Add Record</a></li>
+            
+        </ul>
+    </nav>
+    
+    <a href="{% url 'BlogApp:logout'%}" class="btn">Deconnexion</a>
+
+    {% endif %}
+</header>
+<style>
+    .topbar {
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 100%;
+        justify-content: space-between;
+        padding: 10px 25px;
+        background-color: #fff;
+        color: #4070f4;
+        box-shadow: 10px 10px 10px 1px rgba(160, 146, 146, 0.384);
+    }
+    
+    .topbar .logo {
+        padding: 10px;
+        font-weight: bold;   
+    }
+    .topbar nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    .topbar nav ul {
+        display: flex;
+        list-style: none;
+    }
+    .topbar nav ul li {
+        padding: 0 10px;
+        justify-content: center;
+        font-weight: bold;
+    }
+    .topbar nav ul li a:hover {
+        color: #4070f4;
+        transition: all 1s ease;
+        cursor: default;
+    }
+    .topbar nav ul li a {
+        text-decoration: none;
+        color: #4070f4;
+    }
+    .topbar .btn {
+        padding: 10px;
+        text-decoration: none;
+        border: 1.5px solid;
+        border-color: #4070f4;
+        color: #4070f4;
+        font-weight: bold;
+        background-color: #fff;
+        cursor: default;
+    }
+    .topbar .btn:hover{
+        background-color: #4070f4;
+        color: #fff;
+        transition: all 1s ease;
+    }
+</style>
